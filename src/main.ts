@@ -1,10 +1,16 @@
-import { NestFactory } from '@nestjs/core'
+import { HttpAdapterHost, NestFactory } from '@nestjs/core'
 import { MicroserviceOptions, Transport } from '@nestjs/microservices'
+
+import { PrismaClientExceptionFilter } from '@shared/filters'
 
 import { AppModule } from './app.module'
 
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule)
+
+	const httpAdapterHost = app.get(HttpAdapterHost)
+
+	app.useGlobalFilters(new PrismaClientExceptionFilter(httpAdapterHost.httpAdapter))
 
 	app.connectMicroservice<MicroserviceOptions>({
 		transport: Transport.GRPC,
