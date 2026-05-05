@@ -28,7 +28,7 @@
         "src/libs/*"
       ],
       "@config/*": [
-        "src/libs/*"
+        "src/config/*"
       ],
       "@prisma/generated": [
         "prisma/generated"

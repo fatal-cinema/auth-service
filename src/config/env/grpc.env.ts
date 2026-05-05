@@ -1,0 +1,14 @@
+import { registerAs } from '@nestjs/config'
+
+import { type GrpcConfig } from '@shared/interfaces'
+import { validateEnv } from '@shared/utils'
+import { GrpcValidator } from '@shared/validators'
+
+export const grpcEnv = registerAs<GrpcConfig>('grpc', () => {
+	validateEnv(process.env, GrpcValidator)
+
+	return {
+		host: process.env.GRPC_HOST!,
+		port: parseInt(process.env.GRPC_PORT!),
+	}
+})

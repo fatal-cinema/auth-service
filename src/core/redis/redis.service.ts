@@ -3,16 +3,18 @@ import { Injectable, Logger, type OnModuleDestroy, type OnModuleInit } from '@ne
 import { ConfigService } from '@nestjs/config'
 import Redis from 'ioredis'
 
+import { AllConfigs } from '@shared/interfaces'
+
 @Injectable()
 export class RedisService extends Redis implements OnModuleInit, OnModuleDestroy {
 	private readonly logger = new Logger(RedisService.name)
 
-	constructor(private readonly configService: ConfigService) {
+	constructor(private readonly configService: ConfigService<AllConfigs>) {
 		super({
-			host: configService.getOrThrow<string>('REDIS_HOST'),
-			username: configService.getOrThrow<string>('REDIS_USER'),
-			password: configService.getOrThrow<string>('REDIS_PASSWORD'),
-			port: configService.getOrThrow<number>('REDIS_PORT'),
+			host: configService.getOrThrow('redis.host', { infer: true }),
+			username: configService.getOrThrow('redis.user', { infer: true }),
+			password: configService.getOrThrow('redis.password', { infer: true }),
+			port: configService.getOrThrow('redis.port', { infer: true }),
 			maxRetriesPerRequest: 5,
 			enableOfflineQueue: true,
 		})

@@ -3,18 +3,20 @@ import { ConfigService } from '@nestjs/config'
 import { PrismaPg } from '@prisma/adapter-pg'
 import { PrismaClient } from '@prisma/generated/client'
 
+import { AllConfigs } from '@shared/interfaces'
+
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
 	private readonly logger = new Logger(PrismaService.name)
 
-	constructor(private readonly configService: ConfigService) {
-		const user = configService.getOrThrow<string>('POSTGRES_USER')
-		const pass = configService.getOrThrow<string>('POSTGRES_PASSWORD')
-		const host = configService.getOrThrow<string>('POSTGRES_HOST')
-		const port = configService.getOrThrow<string>('POSTGRES_PORT')
-		const db = configService.getOrThrow<string>('POSTGRES_DATABASE')
+	constructor(private readonly configService: ConfigService<AllConfigs>) {
+		const user = configService.getOrThrow('database.user', { infer: true })
+		const pass = configService.getOrThrow('database.password', { infer: true })
+		const host = configService.getOrThrow('database.host', { infer: true })
+		const port = configService.getOrThrow('database.port', { infer: true })
+		const name = configService.getOrThrow('database.name', { infer: true })
 
-		const url = `postgresql://${user}:${pass}@${host}:${port}/${db}`
+		const url = `postgresql://${user}:${pass}@${host}:${port}/${name}`
 
 		super({ adapter: new PrismaPg({ connectionString: url }) })
 	}
