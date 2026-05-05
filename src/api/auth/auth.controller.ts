@@ -1,16 +1,17 @@
 import {
+	AuthServiceController,
 	type SendOtpRequest,
 	type SendOtpResponse,
 	type VerifyOtpRequest,
 	type VerifyOtpResponse,
-} from '@fatal-cinema/contracts/gen/auth/v1/auth'
+} from '@fatal-cinema/contracts/gen/auth'
 import { Controller } from '@nestjs/common'
 import { GrpcMethod } from '@nestjs/microservices'
 
 import { AuthService } from './auth.service'
 
 @Controller()
-export class AuthController {
+export class AuthController implements AuthServiceController {
 	constructor(private readonly authService: AuthService) {}
 
 	@GrpcMethod('AuthService', 'SendOtp')
@@ -19,7 +20,7 @@ export class AuthController {
 	}
 
 	@GrpcMethod('AuthService', 'VerifyOtp')
-	async verifydOtp(data: VerifyOtpRequest): Promise<VerifyOtpResponse> {
+	async verifyOtp(data: VerifyOtpRequest): Promise<VerifyOtpResponse> {
 		return this.authService.verifyOtp(data)
 	}
 }

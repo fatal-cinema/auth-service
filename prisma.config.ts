@@ -8,6 +8,6 @@ export default defineConfig({
 		path: 'prisma/migrations',
 	},
 	datasource: {
-		url: `DATABASEql://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_HOST}:${process.env.DATABASE_PORT}/${process.env.DATABASE_NAME}`,
+		url: `posrgresql://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_HOST}:${process.env.DATABASE_PORT}/${process.env.DATABASE_NAME}`,
 	},
 })

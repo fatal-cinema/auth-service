@@ -1,10 +1,5 @@
 import { RpcStatus } from '@fatal-cinema/common'
-import {
-	type SendOtpRequest,
-	type SendOtpResponse,
-	type VerifyOtpRequest,
-	type VerifyOtpResponse,
-} from '@fatal-cinema/contracts/gen/auth/v1/auth'
+import type { SendOtpRequest, SendOtpResponse, VerifyOtpRequest, VerifyOtpResponse } from '@fatal-cinema/contracts/gen/auth'
 import { Injectable } from '@nestjs/common'
 import { RpcException } from '@nestjs/microservices'
 
