@@ -24,6 +24,7 @@
 		"db:seed": "ts-node -r tsconfig-paths/register src/core/prisma/prisma.seed.ts"
 	},
 	"dependencies": {
+		"@fatal-cinema/common": "^1.0.0",
 		"@fatal-cinema/contracts": "^1.0.1",
 		"@fatal-cinema/core": "^1.0.6",
 		"@grpc/grpc-js": "^1.14.3",

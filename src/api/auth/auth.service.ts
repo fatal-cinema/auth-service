@@ -1,3 +1,4 @@
+import { RpcStatus } from '@fatal-cinema/common'
 import {
 	type SendOtpRequest,
 	type SendOtpResponse,
@@ -58,7 +59,10 @@ export class AuthService {
 		}
 
 		if (!account) {
-			throw new RpcException('Account not found')
+			throw new RpcException({
+				code: RpcStatus.NOT_FOUND,
+				details: 'Account not found',
+			})
 		}
 
 		if (type === 'phone' && !account.isPhoneVerified) {

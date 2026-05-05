@@ -427,6 +427,11 @@
     "@eslint/core" "^0.17.0"
     levn "^0.4.1"
 
+"@fatal-cinema/common@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@fatal-cinema/common/-/common-1.0.0.tgz#e76c1dbb321ccc42a28fe54d1d58421d8acb9813"
+  integrity sha512-RAzoy+z8fkgBu2ftL56UOr525VC9jePTg03UmDVHIIB7WSHpjU9JTpEViKB/M2KvMwFB+NOtOvLmDzM7LO8VBw==
+
 "@fatal-cinema/contracts@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@fatal-cinema/contracts/-/contracts-1.0.1.tgz#65b5bc9b588f66e54ea5fbefa4bec055574bb0a8"
