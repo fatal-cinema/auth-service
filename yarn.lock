@@ -448,6 +448,16 @@
     "@ianvs/prettier-plugin-sort-imports" "^4.7.1"
     prettier-plugin-tailwindcss "^0.7.2"
 
+"@fatal-cinema/passport@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@fatal-cinema/passport/-/passport-1.0.0.tgz#08668ce00a89a9d3a6500f21c96f40b91c247f04"
+  integrity sha512-YZOti5d/rR6oaq7TSMAAM5wp5JztkQulv03vqjON1I1X3eCzQE5d+fG/aYHclBH+6i0P9hrvhTo6mUx7ytyXTQ==
+  dependencies:
+    "@nestjs/common" "^11.1.19"
+    "@nestjs/core" "^11.1.19"
+    reflect-metadata "^0.2.2"
+    rxjs "^7.8.2"
+
 "@grpc/grpc-js@^1.14.3":
   version "1.14.3"
   resolved "https://registry.yarnpkg.com/@grpc/grpc-js/-/grpc-js-1.14.3.tgz#4c9b817a900ae4020ddc28515ae4b52c78cfb8da"
@@ -1023,7 +1033,7 @@
     webpack "5.106.0"
     webpack-node-externals "3.0.0"
 
-"@nestjs/common@^11.0.1":
+"@nestjs/common@^11.0.1", "@nestjs/common@^11.1.19":
   version "11.1.19"
   resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-11.1.19.tgz#50ba93ae45ebaeda6163554b8e2ecec545a25c92"
   integrity sha512-qeiTt2tv+e5QyDKqG8HlVZb2wx64FEaSGFJouqTSRs+kG44iTfl3xlz1XqVped+rihx4hmjWgL5gkhtdK3E6+Q==
@@ -1043,7 +1053,7 @@
     dotenv-expand "12.0.3"
     lodash "4.18.1"
 
-"@nestjs/core@^11.0.1":
+"@nestjs/core@^11.0.1", "@nestjs/core@^11.1.19":
   version "11.1.19"
   resolved "https://registry.yarnpkg.com/@nestjs/core/-/core-11.1.19.tgz#d724f1afc0caac29e005464f0f659425fc80235b"
   integrity sha512-6nJkWa2efrYi+XlU686J9y5L7OvxpLVjT0T/sxRKE7Jvpffiihelup4WSvLvRhdHDjj/5SuoWEwqReXAaaeHmw==
