@@ -1,5 +1,8 @@
 import {
+	AUTH_SERVICE_NAME,
 	AuthServiceController,
+	type RefreshRequest,
+	type RefreshResponse,
 	type SendOtpRequest,
 	type SendOtpResponse,
 	type VerifyOtpRequest,
@@ -14,13 +17,18 @@ import { AuthService } from './auth.service'
 export class AuthController implements AuthServiceController {
 	constructor(private readonly authService: AuthService) {}
 
-	@GrpcMethod('AuthService', 'SendOtp')
+	@GrpcMethod(AUTH_SERVICE_NAME, 'SendOtp')
 	async sendOtp(data: SendOtpRequest): Promise<SendOtpResponse> {
 		return this.authService.sendOtp(data)
 	}
 
-	@GrpcMethod('AuthService', 'VerifyOtp')
+	@GrpcMethod(AUTH_SERVICE_NAME, 'VerifyOtp')
 	async verifyOtp(data: VerifyOtpRequest): Promise<VerifyOtpResponse> {
 		return this.authService.verifyOtp(data)
+	}
+
+	@GrpcMethod(AUTH_SERVICE_NAME, 'Refresh')
+	async refresh(data: RefreshRequest): Promise<RefreshResponse> {
+		return this.authService.refresh(data)
 	}
 }

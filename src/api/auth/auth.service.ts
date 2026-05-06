@@ -1,5 +1,5 @@
 import { RpcStatus } from '@fatal-cinema/common'
-import type { SendOtpRequest, SendOtpResponse, VerifyOtpRequest, VerifyOtpResponse } from '@fatal-cinema/contracts/gen/auth'
+import type { RefreshRequest, SendOtpRequest, SendOtpResponse, VerifyOtpRequest, VerifyOtpResponse } from '@fatal-cinema/contracts/gen/auth'
 import { PassportService, TokenPayload } from '@fatal-cinema/passport'
 import { Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
@@ -78,6 +78,21 @@ export class AuthService {
 		}
 
 		return this.generateTokens(account.id)
+	}
+
+	async refresh(data: RefreshRequest) {
+		const { refreshToken } = data
+
+		const result = this.passportService.verify(refreshToken)
+
+		if (!result.valid || !result.userId) {
+			throw new RpcException({
+				code: RpcStatus.UNAUTHENTICATED,
+				details: result.reason,
+			})
+		}
+
+		return this.generateTokens(result.userId)
 	}
 
 	private generateTokens(userId: string) {
