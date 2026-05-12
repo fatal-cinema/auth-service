@@ -427,15 +427,15 @@
     "@eslint/core" "^0.17.0"
     levn "^0.4.1"
 
-"@fatal-cinema/common@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@fatal-cinema/common/-/common-1.0.0.tgz#e76c1dbb321ccc42a28fe54d1d58421d8acb9813"
-  integrity sha512-RAzoy+z8fkgBu2ftL56UOr525VC9jePTg03UmDVHIIB7WSHpjU9JTpEViKB/M2KvMwFB+NOtOvLmDzM7LO8VBw==
+"@fatal-cinema/common@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@fatal-cinema/common/-/common-1.1.2.tgz#8bf0b26344d5ff3a13868af47c97d62d5cd65996"
+  integrity sha512-HrKnQkJfbdMulOHVsWrn+MgPiM1rz3HQeDf4AesZRHklUdSiqNz+PZTdYRi43CN2Hmtr+QsIxcR12sNvyUpAyw==
 
-"@fatal-cinema/contracts@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@fatal-cinema/contracts/-/contracts-1.2.0.tgz#0892c1140bdcb15a8bd7f4248f0e87960e25983b"
-  integrity sha512-yFoAWVyRVgNb8CfspMR24xXB3MjvK0+9ckLdYbxgL9ocU7DCk6/6S/BOxkxjNjrtD41ReU26Y8AXANv5jDnEeQ==
+"@fatal-cinema/contracts@^1.3.1":
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/@fatal-cinema/contracts/-/contracts-1.3.1.tgz#9524a3f100e84fc27748aab0d260b420a0df4dbd"
+  integrity sha512-zzM8s2mx0zs+jb7XNEAPJfHHsWc0qEOukJPnXNLHgmIoC8f654txP30FsQ1WWVecl4XNtOBolfYF8nH8r3YKSw==
   dependencies:
     "@nestjs/microservices" "^11.1.19"
     rxjs "^7.8.2"

@@ -6,6 +6,7 @@ export const returnAccountObject = {
 	email: true,
 	isEmailVerified: true,
 	isPhoneVerified: true,
+	role: true,
 } satisfies AccountSelect
 
 export type TAccount = AccountGetPayload<{
