@@ -7,6 +7,7 @@ import { RpcException } from '@nestjs/microservices'
 
 import type { AllConfigs } from '@shared/interfaces'
 import type { TAccount } from '@shared/objects'
+import { UserRepository } from '@shared/repositories'
 import { OtpService } from '@api/otp/otp.service'
 
 import { AuthRepository } from './auth.repository'
@@ -19,6 +20,7 @@ export class AuthService {
 	constructor(
 		private readonly configService: ConfigService<AllConfigs>,
 		private readonly authRepository: AuthRepository,
+		private readonly userRepository: UserRepository,
 		private readonly otpService: OtpService,
 		private readonly passportService: PassportService
 	) {
@@ -32,9 +34,9 @@ export class AuthService {
 		let account: TAccount | null
 
 		if (type === 'phone') {
-			account = await this.authRepository.findByPhone(identifier)
+			account = await this.userRepository.findByPhone(identifier)
 		} else {
-			account = await this.authRepository.findByEmail(identifier)
+			account = await this.userRepository.findByEmail(identifier)
 		}
 
 		if (!account) {
@@ -44,7 +46,7 @@ export class AuthService {
 			})
 		}
 
-		const code = await this.otpService.send(identifier, type as 'phone' | 'email')
+		const { code } = await this.otpService.send(identifier, type as 'phone' | 'email')
 
 		console.debug('CODE: ', code)
 
@@ -59,9 +61,9 @@ export class AuthService {
 		let account: TAccount | null
 
 		if (type === 'phone') {
-			account = await this.authRepository.findByPhone(identifier)
+			account = await this.userRepository.findByPhone(identifier)
 		} else {
-			account = await this.authRepository.findByEmail(identifier)
+			account = await this.userRepository.findByEmail(identifier)
 		}
 
 		if (!account) {
@@ -72,9 +74,9 @@ export class AuthService {
 		}
 
 		if (type === 'phone' && !account.isPhoneVerified) {
-			await this.authRepository.update(account.id, { isPhoneVerified: true })
+			await this.userRepository.update(account.id, { isPhoneVerified: true })
 		} else if (type === 'email' && !account.isEmailVerified) {
-			await this.authRepository.update(account.id, { isEmailVerified: true })
+			await this.userRepository.update(account.id, { isEmailVerified: true })
 		}
 
 		return this.generateTokens(account.id)

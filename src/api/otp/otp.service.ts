@@ -15,7 +15,7 @@ export class OtpService {
 
 		await this.redisService.set(`otp:${type}:${identifier}`, hash, 'EX', 300)
 
-		return code
+		return { code, hash }
 	}
 
 	async verify(identifier: string, type: 'phone' | 'email', code: string) {
