@@ -15,8 +15,8 @@ import {
 import { Injectable } from '@nestjs/common'
 import { RpcException } from '@nestjs/microservices'
 
+import { OtpService } from '@libs/otp/otp.service'
 import { UserRepository } from '@shared/repositories'
-import { OtpService } from '@api/otp/otp.service'
 
 import { AccountRepository } from './account.repository'
 

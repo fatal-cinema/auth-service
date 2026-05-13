@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common'
 
-import { OtpModule } from '@api/otp/otp.module'
+import { OtpModule } from '@libs/otp/otp.module'
 
 import { AccountController } from './account.controller'
 import { AccountRepository } from './account.repository'

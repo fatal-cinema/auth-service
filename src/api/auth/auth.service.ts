@@ -1,32 +1,23 @@
 import { RpcStatus } from '@fatal-cinema/common'
 import type { RefreshRequest, SendOtpRequest, SendOtpResponse, VerifyOtpRequest, VerifyOtpResponse } from '@fatal-cinema/contracts/gen/auth'
-import { PassportService, TokenPayload } from '@fatal-cinema/passport'
 import { Injectable } from '@nestjs/common'
-import { ConfigService } from '@nestjs/config'
 import { RpcException } from '@nestjs/microservices'
 
-import type { AllConfigs } from '@shared/interfaces'
+import { OtpService } from '@libs/otp/otp.service'
+import { TokenService } from '@libs/token/token.service'
 import type { TAccount } from '@shared/objects'
 import { UserRepository } from '@shared/repositories'
-import { OtpService } from '@api/otp/otp.service'
 
 import { AuthRepository } from './auth.repository'
 
 @Injectable()
 export class AuthService {
-	private readonly ACCESS_TOKEN_TTL: number
-	private readonly REFRESH_TOKEN_TTL: number
-
 	constructor(
-		private readonly configService: ConfigService<AllConfigs>,
 		private readonly authRepository: AuthRepository,
 		private readonly userRepository: UserRepository,
 		private readonly otpService: OtpService,
-		private readonly passportService: PassportService
-	) {
-		this.ACCESS_TOKEN_TTL = configService.getOrThrow('passport.accessTtl', { infer: true })
-		this.REFRESH_TOKEN_TTL = configService.getOrThrow('passport.refreshTtl', { infer: true })
-	}
+		private readonly tokenService: TokenService
+	) {}
 
 	async sendOtp(data: SendOtpRequest): Promise<SendOtpResponse> {
 		const { identifier, type } = data
@@ -79,13 +70,13 @@ export class AuthService {
 			await this.userRepository.update(account.id, { isEmailVerified: true })
 		}
 
-		return this.generateTokens(account.id)
+		return this.tokenService.generate(account.id)
 	}
 
 	async refresh(data: RefreshRequest) {
 		const { refreshToken } = data
 
-		const result = this.passportService.verify(refreshToken)
+		const result = this.tokenService.verify(refreshToken)
 
 		if (!result.valid || !result.userId) {
 			throw new RpcException({
@@ -94,17 +85,6 @@ export class AuthService {
 			})
 		}
 
-		return this.generateTokens(result.userId)
-	}
-
-	private generateTokens(userId: string) {
-		const payload: TokenPayload = {
-			sub: userId,
-		}
-
-		const accessToken = this.passportService.generate(String(payload.sub), this.ACCESS_TOKEN_TTL)
-		const refreshToken = this.passportService.generate(String(payload.sub), this.REFRESH_TOKEN_TTL)
-
-		return { accessToken, refreshToken }
+		return this.tokenService.generate(result.userId)
 	}
 }
