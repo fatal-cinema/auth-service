@@ -31,7 +31,7 @@ export class AuthService {
 		}
 
 		if (!account) {
-			account = await this.authRepository.create({
+			account = await this.userRepository.create({
 				email: type === 'email' ? identifier : undefined,
 				phone: type === 'phone' ? identifier : undefined,
 			})

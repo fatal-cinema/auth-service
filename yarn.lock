@@ -432,10 +432,10 @@
   resolved "https://registry.yarnpkg.com/@fatal-cinema/common/-/common-1.1.2.tgz#8bf0b26344d5ff3a13868af47c97d62d5cd65996"
   integrity sha512-HrKnQkJfbdMulOHVsWrn+MgPiM1rz3HQeDf4AesZRHklUdSiqNz+PZTdYRi43CN2Hmtr+QsIxcR12sNvyUpAyw==
 
-"@fatal-cinema/contracts@^1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@fatal-cinema/contracts/-/contracts-1.6.0.tgz#57bbac03aed698a9979a8ce32fb23cbc660c2bf2"
-  integrity sha512-dxP/PydaF2Vvk6e9B5vJ512R8HEiAOy6+atBsetX06WIddpIq8M8RtvAiMc096k/RU4Qke7RiDlhAkS45Kkffg==
+"@fatal-cinema/contracts@^1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@fatal-cinema/contracts/-/contracts-1.7.0.tgz#b8ef95aa9177f92056b2d2ed61c02e76e536550a"
+  integrity sha512-s9spgaDK4tniT9WbD6BLOkLXBRE+6rk77QYbZQ8AyifVb3o30z/nSj5Epo35bZnLBILn/9/3Um95ToSXXJplhw==
   dependencies:
     "@nestjs/microservices" "^11.1.19"
     rxjs "^7.8.2"

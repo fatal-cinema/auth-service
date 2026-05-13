@@ -1,24 +1,12 @@
 import { Injectable } from '@nestjs/common'
 import { ContactType } from '@prisma/generated/enums'
-import { PendingContactChangeUpdateInput } from '@prisma/generated/models'
 
 import { PrismaService } from '@core/prisma/prisma.service'
-import { returnAccountObject, returnPendingContactChangeObject, TAccount, TPendingContactChange } from '@shared/objects'
+import { returnPendingContactChangeObject, TPendingContactChange } from '@shared/objects'
 
 @Injectable()
 export class AccountRepository {
 	constructor(private readonly prismaService: PrismaService) {}
-
-	async findById(id: string): Promise<TAccount | null> {
-		const account = await this.prismaService.account.findUnique({
-			where: {
-				id,
-			},
-			select: returnAccountObject,
-		})
-
-		return account
-	}
 
 	async findPendingContactChange(accountId: string, type: ContactType): Promise<TPendingContactChange | null> {
 		const pendingContactChange = await this.prismaService.pendingContactChange.findUnique({

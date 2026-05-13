@@ -31,7 +31,7 @@ export class AccountService {
 	async getAccount(data: GetAccountRequest): Promise<GetAccountResponse> {
 		const { id } = data
 
-		const account = await this.accountRepository.findById(id)
+		const account = await this.userRepository.findById(id)
 
 		if (!account) {
 			throw new RpcException({

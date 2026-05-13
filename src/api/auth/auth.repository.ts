@@ -7,13 +7,4 @@ import { returnAccountObject, TAccount } from '@shared/objects'
 @Injectable()
 export class AuthRepository {
 	constructor(private readonly prismaService: PrismaService) {}
-
-	async create(data: AccountCreateInput): Promise<TAccount> {
-		const newAccount = await this.prismaService.account.create({
-			data,
-			select: returnAccountObject,
-		})
-
-		return newAccount
-	}
 }
