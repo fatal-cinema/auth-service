@@ -15,6 +15,7 @@ import {
 import { Injectable } from '@nestjs/common'
 import { RpcException } from '@nestjs/microservices'
 
+import { MessagingService } from '@core/messaging/messaging.service'
 import { OtpService } from '@libs/otp/otp.service'
 import { UserRepository } from '@shared/repositories'
 
@@ -25,7 +26,8 @@ export class AccountService {
 	constructor(
 		private readonly accountRepository: AccountRepository,
 		private readonly userRepository: UserRepository,
-		private readonly otpService: OtpService
+		private readonly otpService: OtpService,
+		private readonly messagingService: MessagingService
 	) {}
 
 	async getAccount(data: GetAccountRequest): Promise<GetAccountResponse> {
@@ -57,7 +59,7 @@ export class AccountService {
 
 		const { code, hash } = await this.otpService.send(email, 'email')
 
-		console.debug('CODE: ', code)
+		await this.messagingService.emailChanged({ email, code })
 
 		await this.accountRepository.upsertPendingContactChange({
 			accountId: userId,
@@ -120,7 +122,7 @@ export class AccountService {
 
 		const { code, hash } = await this.otpService.send(phone, 'phone')
 
-		console.debug('CODE: ', code)
+		await this.messagingService.phoneChanged({ phone, code })
 
 		await this.accountRepository.upsertPendingContactChange({
 			accountId: userId,
