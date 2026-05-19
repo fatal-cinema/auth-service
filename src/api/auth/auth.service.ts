@@ -3,6 +3,7 @@ import type { RefreshRequest, SendOtpRequest, SendOtpResponse, VerifyOtpRequest,
 import { Injectable } from '@nestjs/common'
 import { RpcException } from '@nestjs/microservices'
 
+import { MessagingService } from '@core/messaging/messaging.service'
 import { OtpService } from '@libs/otp/otp.service'
 import { TokenService } from '@libs/token/token.service'
 import type { TAccount } from '@shared/objects'
@@ -16,7 +17,8 @@ export class AuthService {
 		private readonly authRepository: AuthRepository,
 		private readonly userRepository: UserRepository,
 		private readonly otpService: OtpService,
-		private readonly tokenService: TokenService
+		private readonly tokenService: TokenService,
+		private readonly messagingService: MessagingService
 	) {}
 
 	async sendOtp(data: SendOtpRequest): Promise<SendOtpResponse> {
@@ -39,7 +41,7 @@ export class AuthService {
 
 		const { code } = await this.otpService.send(identifier, type as 'phone' | 'email')
 
-		console.debug('CODE: ', code)
+		await this.messagingService.otpRequested({ identifier, type, code })
 
 		return { ok: true }
 	}

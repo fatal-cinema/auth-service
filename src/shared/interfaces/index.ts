@@ -3,5 +3,6 @@ export * from './database.interface'
 export * from './redis.interface'
 export * from './passport.interface'
 export * from './telegram.interface'
+export * from './rmq.interface'
 
 export * from './all-config.interface'
