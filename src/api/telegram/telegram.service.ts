@@ -16,6 +16,7 @@ import { RedisService } from '@core/redis/redis.service'
 import { TokenService } from '@libs/token/token.service'
 import type { AllConfigs } from '@shared/interfaces'
 import { UserRepository } from '@shared/repositories'
+import { UsersGrpcClient } from '@api/users/users.grpc'
 
 import { TelegramRepository } from './telegram.repository'
 
@@ -31,7 +32,8 @@ export class TelegramService {
 		private readonly telegramRepository: TelegramRepository,
 		private readonly userRepository: UserRepository,
 		private readonly redisService: RedisService,
-		private readonly tokenService: TokenService
+		private readonly tokenService: TokenService,
+		private readonly usersClient: UsersGrpcClient
 	) {
 		this.BOT_ID = this.configService.getOrThrow('telegram.botId', { infer: true })
 		this.BOT_TOKEN = this.configService.getOrThrow('telegram.botToken', { infer: true })
@@ -94,6 +96,8 @@ export class TelegramService {
 		if (!user) {
 			user = await this.userRepository.create({ phone })
 		}
+
+		this.usersClient.createUser({ id: user.id }).subscribe()
 
 		await this.userRepository.update(user.id, {
 			telegramId,

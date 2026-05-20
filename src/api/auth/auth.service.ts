@@ -8,6 +8,7 @@ import { OtpService } from '@libs/otp/otp.service'
 import { TokenService } from '@libs/token/token.service'
 import type { TAccount } from '@shared/objects'
 import { UserRepository } from '@shared/repositories'
+import { UsersGrpcClient } from '@api/users/users.grpc'
 
 import { AuthRepository } from './auth.repository'
 
@@ -18,7 +19,8 @@ export class AuthService {
 		private readonly userRepository: UserRepository,
 		private readonly otpService: OtpService,
 		private readonly tokenService: TokenService,
-		private readonly messagingService: MessagingService
+		private readonly messagingService: MessagingService,
+		private readonly usersClient: UsersGrpcClient
 	) {}
 
 	async sendOtp(data: SendOtpRequest): Promise<SendOtpResponse> {
@@ -40,6 +42,8 @@ export class AuthService {
 		}
 
 		const { code } = await this.otpService.send(identifier, type as 'phone' | 'email')
+
+		console.debug(`CODE: ${code}`)
 
 		await this.messagingService.otpRequested({ identifier, type, code })
 
@@ -71,6 +75,8 @@ export class AuthService {
 		} else if (type === 'email' && !account.isEmailVerified) {
 			await this.userRepository.update(account.id, { isEmailVerified: true })
 		}
+
+		this.usersClient.createUser({ id: account.id }).subscribe()
 
 		return this.tokenService.generate(account.id)
 	}
