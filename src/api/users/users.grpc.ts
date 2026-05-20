@@ -4,6 +4,8 @@ import {
 	type CreateUserResponse,
 	type GetMeRequest,
 	type GetMeResponse,
+	type PatchUserRequest,
+	type PatchUserResponse,
 	type UsersServiceClient,
 } from '@fatal-cinema/contracts/gen/users'
 import { Inject, Injectable, OnModuleInit } from '@nestjs/common'
@@ -26,5 +28,9 @@ export class UsersGrpcClient implements OnModuleInit, UsersServiceClient {
 
 	getMe(request: GetMeRequest): Observable<GetMeResponse> {
 		return this.usersService.getMe(request)
+	}
+
+	patchUser(request: PatchUserRequest): Observable<PatchUserResponse> {
+		return this.usersService.patchUser(request)
 	}
 }
