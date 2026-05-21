@@ -1,6 +1,7 @@
 services:
   auth-service:
     container_name: fatal-cinema-auth-service
+    image: fatal-cinema/auth-service:dev
     build:
       context: .
       dockerfile: Dockerfile
