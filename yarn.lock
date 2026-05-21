@@ -359,6 +359,11 @@
   dependencies:
     tslib "^2.4.0"
 
+"@epic-web/invariant@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@epic-web/invariant/-/invariant-1.0.0.tgz#1073e5dee6dd540410784990eb73e4acd25c9813"
+  integrity sha512-lrTPqgvfFQtR/eY/qkIzp98OGdNJu0m5ji3q/nJI8v3SXkRKEnWiOxMmbvcSoAIzv/cGiuvRy57k4suKQSAdwA==
+
 "@eslint-community/eslint-utils@^4.8.0", "@eslint-community/eslint-utils@^4.9.1":
   version "4.9.1"
   resolved "https://registry.yarnpkg.com/@eslint-community/eslint-utils/-/eslint-utils-4.9.1.tgz#4e90af67bc51ddee6cdef5284edf572ec376b595"
@@ -427,10 +432,15 @@
     "@eslint/core" "^0.17.0"
     levn "^0.4.1"
 
-"@fatal-cinema/common@^1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@fatal-cinema/common/-/common-1.1.2.tgz#8bf0b26344d5ff3a13868af47c97d62d5cd65996"
-  integrity sha512-HrKnQkJfbdMulOHVsWrn+MgPiM1rz3HQeDf4AesZRHklUdSiqNz+PZTdYRi43CN2Hmtr+QsIxcR12sNvyUpAyw==
+"@fatal-cinema/common@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@fatal-cinema/common/-/common-1.5.0.tgz#5376cdf27ed5eb0b8e35d956ce036d8ad37ed172"
+  integrity sha512-TZqvGzVp4bbRA89aDu0pTV1MTBvqzt13Tp0THN5jI/XuX2dPW+lRRhbVmvks/gxZfq6v3yjYdXhqcf9EIZYhPw==
+  dependencies:
+    "@fatal-cinema/contracts" "^1.11.0"
+    "@nestjs/common" "^11.1.21"
+    "@nestjs/config" "^4.0.4"
+    "@nestjs/microservices" "^11.1.21"
 
 "@fatal-cinema/contracts@^1.11.0":
   version "1.11.0"
@@ -1044,6 +1054,17 @@
     load-esm "1.0.3"
     tslib "2.8.1"
 
+"@nestjs/common@^11.1.21":
+  version "11.1.21"
+  resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-11.1.21.tgz#9a45c6c09e90cabfdcc4f9579877fb5d89924d3c"
+  integrity sha512-YV1HYDGsm2rnR0vrLKidtrG6jYX5yqiIjeur1j8++dKGqhhsJ6cjMs0RfQRSTUH7IjgDemA59/znQ8nRrE0D9g==
+  dependencies:
+    uid "2.0.2"
+    file-type "21.3.4"
+    iterare "1.2.1"
+    load-esm "1.0.3"
+    tslib "2.8.1"
+
 "@nestjs/config@^4.0.4":
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/@nestjs/config/-/config-4.0.4.tgz#311d806fdc32a8bf29cf9ced903b97cbdb7e064b"
@@ -1074,6 +1095,14 @@
   version "11.1.19"
   resolved "https://registry.yarnpkg.com/@nestjs/microservices/-/microservices-11.1.19.tgz#0222ca2331a2a702df3b4dd6b7fd2fe7487fb39a"
   integrity sha512-3Oja56ydTlSaui19/i7gYM0MMqz/w4UR2aqZeL4K8B+Fq0Ztg3zHb8et76atToJGpSCevJLEsoEMOMaGgzRwfg==
+  dependencies:
+    iterare "1.2.1"
+    tslib "2.8.1"
+
+"@nestjs/microservices@^11.1.21":
+  version "11.1.21"
+  resolved "https://registry.yarnpkg.com/@nestjs/microservices/-/microservices-11.1.21.tgz#089a963da9fe9f13d9ee4b0fe3bb198d06181b3c"
+  integrity sha512-NRDK/lCSD5ul53NE5YHuXKygI7P73OLSR5gljFBrUfLip37L/+s96MqUBHCxWt2YCd0GhPJfqO9zttJBxpX5sA==
   dependencies:
     iterare "1.2.1"
     tslib "2.8.1"
@@ -2667,6 +2696,14 @@ create-require@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/create-require/-/create-require-1.1.1.tgz#c1d7e8f1e5f6cfc9ff65f9cd352d37348756c333"
   integrity sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==
+
+cross-env@^10.1.0:
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/cross-env/-/cross-env-10.1.0.tgz#cfd2a6200df9ed75bfb9cb3d7ce609c13ea21783"
+  integrity sha512-GsYosgnACZTADcmEyJctkJIoqAhHjttw7RsFrVoJNXbsWWqaq6Ym+7kZjq6mS45O0jij6vtiReppKQEtqWy6Dw==
+  dependencies:
+    "@epic-web/invariant" "^1.0.0"
+    cross-spawn "^7.0.6"
 
 cross-spawn@^7.0.3, cross-spawn@^7.0.6:
   version "7.0.6"

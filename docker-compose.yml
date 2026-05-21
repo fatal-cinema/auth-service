@@ -1,0 +1,15 @@
+services:
+  auth-service:
+    container_name: fatal-cinema-auth-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    env_file:
+      - .env.production.local
+    networks:
+      - fatal-cinema
+
+networks:
+  fatal-cinema:
+    external: true
