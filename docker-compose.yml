@@ -8,6 +8,8 @@ services:
     restart: always
     env_file:
       - .env.production.local
+    expose:
+      - 9101
     networks:
       - fatal-cinema
 
