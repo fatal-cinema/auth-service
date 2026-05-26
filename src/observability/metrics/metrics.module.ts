@@ -19,6 +19,7 @@ import { GrpcMetricsInterceptor } from '@observability/interceptors'
 			name: 'grpc_request_duration_seconds',
 			help: 'gRPC request latency',
 			labelNames: ['service', 'method'],
+			buckets: [0.01, 0.05, 0.1, 0.2, 0.5, 1, 2, 5],
 		}),
 		makeCounterProvider({
 			name: 'grpc_requests_total',
@@ -26,10 +27,7 @@ import { GrpcMetricsInterceptor } from '@observability/interceptors'
 			labelNames: ['service', 'method', 'status'],
 		}),
 		GrpcMetricsInterceptor,
-		{
-			provide: APP_INTERCEPTOR,
-			useClass: GrpcMetricsInterceptor,
-		},
 	],
+	exports: [GrpcMetricsInterceptor, 'PROM_METRIC_GRPC_REQUESTS_TOTAL', 'PROM_METRIC_GRPC_REQUEST_DURATION_SECONDS'],
 })
 export class MetricsModule {}

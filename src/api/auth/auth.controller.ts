@@ -8,11 +8,14 @@ import {
 	type VerifyOtpRequest,
 	type VerifyOtpResponse,
 } from '@fatal-cinema/contracts/gen/auth'
-import { Controller } from '@nestjs/common'
+import { Controller, UseInterceptors } from '@nestjs/common'
 import { GrpcMethod } from '@nestjs/microservices'
+
+import { GrpcMetricsInterceptor } from '@observability/interceptors'
 
 import { AuthService } from './auth.service'
 
+@UseInterceptors(GrpcMetricsInterceptor)
 @Controller()
 export class AuthController implements AuthServiceController {
 	constructor(private readonly authService: AuthService) {}

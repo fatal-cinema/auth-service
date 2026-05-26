@@ -12,11 +12,14 @@ import {
 	type InitPhoneChangeRequest,
 	type InitPhoneChangeResponse,
 } from '@fatal-cinema/contracts/gen/account'
-import { Controller } from '@nestjs/common'
+import { Controller, UseInterceptors } from '@nestjs/common'
 import { GrpcMethod } from '@nestjs/microservices'
+
+import { GrpcMetricsInterceptor } from '@observability/interceptors'
 
 import { AccountService } from './account.service'
 
+@UseInterceptors(GrpcMetricsInterceptor)
 @Controller()
 export class AccountController implements AccountServiceController {
 	constructor(private readonly accountService: AccountService) {}

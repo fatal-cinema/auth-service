@@ -9,11 +9,14 @@ import {
 	type TelegramVerifyRequest,
 	type TelegramVerifyResponse,
 } from '@fatal-cinema/contracts/gen/telegram'
-import { Controller } from '@nestjs/common'
+import { Controller, UseInterceptors } from '@nestjs/common'
 import { GrpcMethod } from '@nestjs/microservices'
+
+import { GrpcMetricsInterceptor } from '@observability/interceptors'
 
 import { TelegramService } from './telegram.service'
 
+@UseInterceptors(GrpcMetricsInterceptor)
 @Controller()
 export class TelegramController implements TelegramServiceController {
 	constructor(private readonly telegramService: TelegramService) {}
